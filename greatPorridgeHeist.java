@@ -1,8 +1,10 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
 import java.util.Scanner;
 
 public class greatPorridgeHeist {
         public static void pause() {
-        System.out.println("----------------------------------");
         System.out.println("Press Enter to continue...");
         Scanner temp = new Scanner(System.in);
         temp.nextLine();
@@ -138,7 +140,7 @@ public class greatPorridgeHeist {
             
             pause(); 
                
-            System.out.println("\n=== The Rescue ===");
+            System.out.println("\nThe Rescue");
             System.out.println("You find Hansel & Gretel trapped in a cage!");
             System.out.println("1. Save Hansel & Gretel");
             System.out.println("2. Leave them for the Oven");
@@ -231,7 +233,7 @@ public class greatPorridgeHeist {
             
             System.out.println("\n THE END");
             System.out.println("Steps taken: " + stepsTaken);
-            System.out.println("Final score: " + finalScore);
+            System.out.println("Final score: " + Math.round(finalScore));
             
             
             if (greed && speedHigh && tool == 1) {
