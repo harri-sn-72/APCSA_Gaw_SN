@@ -1,5 +1,6 @@
-// Online Java Compiler
-// Use this editor to write, compile and run your Java code online
+// SN, Severson
+// Great Porridge Heist - Fairy Tale Project
+// Last modified: February 11, 2026 at 4:52 AM
 
 import java.util.Scanner;
 
@@ -234,7 +235,7 @@ public class greatPorridgeHeist {
             System.out.println("\n THE END");
             System.out.println("Steps taken: " + stepsTaken);
             System.out.println("Final score: " + Math.round(finalScore));
-            
+                //CREDIT for Math.round function: StackOverflow https://stackoverflow.com/questions/13210491/math-round-java
             
             if (greed && speedHigh && tool == 1) {
                
@@ -268,3 +269,4 @@ public class greatPorridgeHeist {
         scanner.close();
     }
 }
+
