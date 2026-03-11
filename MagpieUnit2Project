@@ -1,0 +1,389 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Magpie
+{
+  public static void main(String[] args)
+  {
+    Magpie magpie = new Magpie();
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println(magpie.getGreeting());
+
+    String statement = "";
+    while (!statement.equalsIgnoreCase("bye"))
+    {
+      System.out.print("You: ");
+      statement = scanner.nextLine();
+      if (!statement.equalsIgnoreCase("bye"))
+      {
+        System.out.println("Magpie: " + magpie.getResponse(statement));
+      }
+    }
+
+    System.out.println("Magpie: Goodbye!");
+    scanner.close();
+  }
+  
+  
+  public String getGreeting()
+  {
+    return "Hello, let's talk.";
+  }
+  
+  public String getResponse(String statement)
+  {
+    String response = "";
+    if (statement.trim().length() <= 0)
+    {
+      response = ("Truly, riveting conversation we're having.");
+    }
+    else if (findKeyword(statement, "the", 0) >= 0)
+    {
+      response = "Please, continue talking. This is very interesting.";
+    }
+    else if (findKeyword(statement, "no", 0) >= 0)
+    {
+      response = "Why so negative?";
+    }
+    else if (findKeyword(statement, "name", 0) >= 0)
+    {
+      response = "I'm no good at remembering names.";
+    }
+    else if (findKeyword(statement, "mother", 0) >= 0
+               || findKeyword(statement, "father", 0) >= 0
+               || findKeyword(statement, "sister", 0) >= 0
+               || findKeyword(statement, "brother", 0) >= 0)
+    {
+      response = "Tell me more about your family.";
+    }
+    else if (findKeyword(statement, "cat", 0) >= 0 || (findKeyword(statement, "cats", 0) >= 0)
+               || (findKeyword(statement, "dog", 0) >=0) || (findKeyword(statement, "dogs", 0) >= 0))
+    {
+      response = "Tell me more about your pets.";
+    }
+    else if (findKeyword(statement, "Kiang", 0) >= 0
+               || (findKeyword(statement, "Landgraaf", 0) >= 0))
+    {
+      response = "You know, that's a pretty nifty teacher you got there.";
+    } 
+    else if (findKeyword(statement, "I want", 0) >= 0)
+    {
+      if (findKeyword(statement, "I want to", 0) >= 0)
+      {
+        response = transformIWantToStatement(statement);
+      }
+      else response = transformIWantStatement(statement);
+    }
+    else if (findKeyword(statement, "I was", 0) >= 0)
+    {
+      response = transformIWasStatement(statement);
+    }
+    else if (findKeyword(statement, "Are you", 0) == 0)
+    {
+      response = transformAreYouStatement(statement);
+    }
+    else if (findKeyword(statement, "Do you", 0) == 0)
+    {
+      response = transformDoYouStatement(statement);
+    }
+    else if (findKeyword(statement, "is", 0) >= 0)
+    {
+      response = transformSomethingIsStatement(statement);
+    }
+    else if (findKeyword(statement, "I am", 0) >= 0)
+    {
+      response = transformIAmStatement(statement);
+    }
+    else if (findKeyword(statement, "You are", 0) >= 0)
+    {
+      response = transformYouAreStatement(statement);
+    }
+    else if (findKeyword(statement, "I think", 0) >= 0)
+    {
+      response = transformIThinkStatement(statement);
+    }
+    else if (findKeyword(statement, "are", 0) >= 0)
+    {
+      response = transformSomethingsAreStatement(statement);
+    }
+    else if (findKeyword(statement, "I like", 0) >= 0)
+    {
+      response = transformILikeStatement(statement);
+    }
+    
+    else
+    {
+      int psn = findKeyword(statement, "you", 0);
+      
+      if (psn >= 0
+            && findKeyword(statement, "me", psn) >= 0)
+      {
+        response = transformYouMeStatement(statement);
+      }
+      else
+      {
+        psn = findKeyword(statement, "i", 0);
+        
+        if (psn >= 0
+              && findKeyword(statement, "you", psn) >= 0)
+        {
+          response = transformIYouStatement(statement);
+        }
+        else
+        {
+          response = getRandomResponse();
+        }
+      }
+    }
+    return response;
+  }
+  
+  private String transformYouAreStatement(String statement)
+  {
+    statement = statement.trim();
+    statement = statement.toLowerCase();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals(".") || lastChar.equals("?") || lastChar.equals("!"))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfYouAre = findKeyword(statement, "you are", 0);
+    String restOfStatement = statement.substring(psnOfYouAre + 8);
+    return "Why am I " + restOfStatement + "?";
+  } 
+  
+  private String transformILikeStatement(String statement)
+  {
+    statement = statement.trim();
+    statement = statement.toLowerCase();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals(".") || lastChar.equals("?") || lastChar.equals("!"))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfILike = findKeyword(statement, "I like", 0);
+    String restOfStatement = statement.substring(psnOfILike + 7);
+    return "Why do you like " + restOfStatement + "?";
+  } 
+  
+  private String transformIThinkStatement(String statement)
+  {
+    statement = statement.trim();
+    statement = statement.toLowerCase();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals(".") || lastChar.equals("?") || lastChar.equals("!"))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfIThink = findKeyword(statement, "I think", 0);
+    String restOfStatement = statement.substring(psnOfIThink + 8);
+    return "Why do you think " + restOfStatement + "?";
+  } 
+  
+  private String transformSomethingsAreStatement(String statement)
+  {
+    statement = statement.trim();
+    statement = statement.toLowerCase();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals(".") || lastChar.equals("?") || lastChar.equals("!"))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfAre = findKeyword(statement, "are", 0);
+    String beforeAre = statement.substring(0, psnOfAre);
+    String afterAre = statement.substring(psnOfAre + 4, statement.length());
+    return "Why are " + beforeAre + afterAre + "?";
+  }
+  
+  private String transformIAmStatement(String statement)
+  {
+    statement = statement.trim();
+    statement = statement.toLowerCase();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals(".") || lastChar.equals("?") || lastChar.equals("!"))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfIAm = findKeyword(statement, "I am", 0);
+    String restOfStatement = statement.substring(psnOfIAm + 5);
+    return "Why are you " + restOfStatement + "?";
+  }
+  
+  private String transformIWasStatement(String statement)
+  {
+    statement = statement.trim();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals("."))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfWas = findKeyword(statement, "was", 0);
+    String restOfStatement = statement.substring(psnOfWas + 4);
+    return "Why were you " + restOfStatement + "?";
+  } 
+  
+  private String transformSomethingIsStatement(String statement)
+  {
+    statement = statement.trim();
+    statement = statement.toLowerCase();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals(".") || lastChar.equals("?") || lastChar.equals("!"))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfIs = findKeyword(statement, "is", 0);
+    String beforeIs = statement.substring(0, psnOfIs);
+    String afterIs = statement.substring(psnOfIs + 3, statement.length());
+    return "Why is " + beforeIs + afterIs + "?";
+  }
+  
+  private String transformIWantStatement(String statement)
+  {
+    statement = statement.trim();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals("."))
+    {
+      statement = statement.substring(statement.length() - 1);
+    }
+    int psnOfI = findKeyword(statement, "I", 0);
+    String restOfStatement = statement.substring(psnOfI + 1).trim();
+    return "Why do you " + restOfStatement + "?";
+  }
+
+  private String transformAreYouStatement(String statement)
+  {
+    statement = statement.trim();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals("."))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    if (lastChar.equals("?"))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfAreYou = findKeyword(statement, "Are you", 0);
+    String restOfStatement = statement.substring(psnOfAreYou + 8);
+    return "Why would you think I am " + restOfStatement + "?";
+  }
+  
+  private String transformDoYouStatement(String statement)
+  {
+    statement = statement.trim();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals("."))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    if (lastChar.equals("?"))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfAreYou = findKeyword(statement, "Do you", 0);
+    String restOfStatement = statement.substring(psnOfAreYou + 7);
+    return "Why would you think I " + restOfStatement + "?";
+  }
+  
+  private String transformYouMeStatement(String statement)
+  {
+    statement = statement.trim();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals("."))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    
+    int psnOfYou = findKeyword (statement, "you", 0);
+    int psnOfMe = findKeyword (statement, "me", psnOfYou + 3);
+    
+    String restOfStatement = statement.substring(psnOfYou + 3, psnOfMe).trim();
+    return "What makes you think that I " + restOfStatement + " you?";
+  }
+
+  private String transformIYouStatement(String statement)
+  {
+    statement = statement.trim();
+    String lastChar = statement.substring(statement.length() - 1);
+    if (lastChar.equals("."))
+    {
+      statement = statement.substring(0, statement.length() - 1);
+    }
+    int psnOfI = findKeyword (statement, "I", 0);
+    int psnOfYou = findKeyword (statement, "you", psnOfI + 1);
+    String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
+    return "Why do you " + restOfStatement + " me?";
+  }
+  
+  private String transformIWantToStatement(String statement)
+  {
+    statement = statement.trim();
+    String lastChar = statement.substring(statement
+                                            .length() - 1);
+    if (lastChar.equals("."))
+    {
+      statement = statement.substring(0, statement
+                                        .length() - 1);
+    }
+    int psn = findKeyword (statement, "I want to", 0);
+    String restOfStatement = statement.substring(psn + 9).trim();
+    return "What would it mean to " + restOfStatement + "?";
+  }
+
+  private int findKeyword(String statement, String goal, int startPos)
+  {
+    String phrase = statement.trim().toLowerCase();
+    goal = goal.toLowerCase();
+
+    int psn = phrase.indexOf(goal, startPos);
+
+    while (psn >= 0)
+    {
+      String before = " ";
+      String after = " ";
+
+      if (psn > 0)
+      {
+        before = phrase.substring(psn - 1, psn);
+      }
+      if (psn + goal.length() < phrase.length())
+      {
+        after = phrase.substring(psn + goal.length(), psn + goal.length() + 1);
+      }
+
+      if (((before.compareTo("a") < 0) || (before.compareTo("z") > 0))
+            && ((after.compareTo("a") < 0) || (after.compareTo("z") > 0)))
+      {
+        return psn;
+      }
+
+      psn = phrase.indexOf(goal, psn + 1);
+    }
+
+    return -1;
+  }
+  
+  private int findKeyword(String statement, String goal)
+  {
+    return findKeyword(statement, goal, 0);
+  }
+  
+  
+  private String getRandomResponse()
+  {
+    Random r = new Random ();
+    return randomResponses [r.nextInt(randomResponses.length)];
+  }
+  
+  private String [] randomResponses = {"Interesting, tell me more.",
+    "Hmmm.",
+    "You don't say.",
+    "Please, continue talking.",
+    "I'm gonna go grab a coffee but just pretend I'm still here.",
+    "If you see this, it means I don't know how to respond.",
+    "Wow, you just never stop, do you?",
+    "No, by all means, keep talking.",
+    "Kill me.",
+    "That's nice.",
+  };
+}
