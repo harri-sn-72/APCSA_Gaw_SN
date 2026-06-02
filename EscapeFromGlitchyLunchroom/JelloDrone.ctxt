@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=JelloDrone
+comment1.params=
+comment1.target=JelloDrone()
+comment2.params=
+comment2.target=boolean\ dodged()
+comment3.params=p\ c
+comment3.target=void\ attack(Player,\ Companion)
+numComments=4

@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Enemy
+comment1.params=n\ hp\ img
+comment1.target=Enemy(java.lang.String,\ int,\ java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=
+comment3.target=int\ getHealth()
+comment4.params=
+comment4.target=int\ getMaxHealth()
+comment5.params=
+comment5.target=java.lang.String\ getImageFile()
+comment6.params=
+comment6.target=boolean\ isAlive()
+comment7.params=dmg
+comment7.target=void\ takeDamage(int)
+comment8.params=p\ c
+comment8.target=void\ attack(Player,\ Companion)
+numComments=9

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=SpaghettiSlime
+comment1.params=
+comment1.target=SpaghettiSlime()
+comment2.params=p\ c
+comment2.target=void\ attack(Player,\ Companion)
+numComments=3

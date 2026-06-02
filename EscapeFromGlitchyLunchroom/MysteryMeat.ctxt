@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=MysteryMeat
+comment1.params=
+comment1.target=MysteryMeat()
+comment2.params=p\ c
+comment2.target=void\ attack(Player,\ Companion)
+numComments=3

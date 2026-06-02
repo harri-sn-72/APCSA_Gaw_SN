@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=SpriteWindow
+comment0.text=\r\n\ Shows\ sprite\ png\ files\ during\ battles.\r\n\ Image\ in\ JLabel\ help\:\ https\://stackoverflow.com/questions/21804131/how-to-display-pictures-in-java\r\n
+comment1.params=
+comment1.target=SpriteWindow()
+comment2.params=fileName
+comment2.target=void\ showPicture(java.lang.String)
+comment3.params=
+comment3.target=void\ hideWindow()
+numComments=4

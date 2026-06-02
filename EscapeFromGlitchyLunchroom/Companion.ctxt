@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Companion
+comment1.params=
+comment1.target=Companion()
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=p
+comment3.target=int\ helpAttack(Player)
+comment4.params=dmg
+comment4.target=int\ blockDamage(int)
+comment5.params=p
+comment5.target=void\ healPlayer(Player)
+numComments=6

@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=LunchLady3000
+comment1.params=
+comment1.target=LunchLady3000()
+comment2.params=used
+comment2.target=void\ setPlayerUsedPatch(boolean)
+comment3.params=p\ c
+comment3.target=void\ attack(Player,\ Companion)
+comment4.params=p\ c
+comment4.target=void\ normalAttack(Player,\ Companion)
+comment5.params=p\ c
+comment5.target=void\ specialAttack(Player,\ Companion)
+comment6.params=p\ c
+comment6.target=void\ rageAttack(Player,\ Companion)
+numComments=7
