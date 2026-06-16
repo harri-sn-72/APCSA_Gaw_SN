@@ -20,3 +20,6 @@
     }
   }
 }
+
+DCA1000EVM_CLI_Control.exe eeprom datacard_config.json
+
